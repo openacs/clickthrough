@@ -1,6 +1,6 @@
 <master>
 <property name=title>Clickthroughs by foreign URL: summary report</property>
-<property name="context">@context@</property>
+<property name="context">@context;noquote@</property>
 
 Note: this page may be slow to generate; it requires a tremendous amount of chugging by the RDBMS.
 

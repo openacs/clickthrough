@@ -1,6 +1,6 @@
 <master>
-<property name=title>Clickthroughs to @foreign_url@</property>
-<property name="context">@context@</property>
+<property name=title>Clickthroughs to @foreign_url;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 
 

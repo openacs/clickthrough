@@ -1,6 +1,6 @@
 <master>
-<property name=title>Clickthroughs from @local_url@</property>
-<property name="context">@context@</property>
+<property name=title>Clickthroughs from @local_url;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 Clickthroughs from <a href="@local_url@">@local_url@</a>
 

@@ -1,6 +1,6 @@
 <master>
-<property name=title>Clickthroughs for @package_name@</property>
-<property name="context">@context@</property>
+<property name=title>Clickthroughs for @package_name;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <ul>
   <li><a href="by-foreign-url">by foreign URL</a></li>

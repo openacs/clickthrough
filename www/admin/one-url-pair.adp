@@ -1,6 +1,6 @@
 <master>
-<property name=title>@local_url@ -&gt; @foreign_url@</property>
-<property name="context">@context@</property>
+<property name=title>@local_url;noquote@ -&gt; @foreign_url;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <h2>
   <a href="@local_url@">@local_url@</a> 

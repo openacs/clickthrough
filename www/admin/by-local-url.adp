@@ -1,6 +1,6 @@
 <master>
 <property name=title>Clickthroughs by local URL</property>
-<property name="context">@context@</property>
+<property name="context">@context;noquote@</property>
 
 <ul>
   <multiple name="urls">

@@ -1,6 +1,6 @@
 <master>
-<property name=title>Clickthroughs to @foreign_url@ on @query_date@</property>
-<property name="context">@context@</property>
+<property name=title>Clickthroughs to @foreign_url;noquote@ on @query_date;noquote@</property>
+<property name="context">@context;noquote@</property>
 
 <h2>Clickthroughs to <a href="@foreign_url@">@foreign_url@</a> on @query_date@</h2>
 
