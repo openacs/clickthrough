@@ -15,9 +15,6 @@ if {![nsv_exists clickthrough_cache total_clicks]} {
     nsv_set clickthrough_mutex mutex [ns_mutex create]
 
     # schedule cache sweeper to run every X seconds
-    ad_schedule_proc 300 clickthrough_cache_sweeper
-
-    #ad_schedule_proc [ad_parameter "CacheSweeperInterval" "clickthrough"] clickthrough_cache_sweeper
-    #can't get package parameter during startup???
+    ad_schedule_proc [ad_parameter -package_id [apm_package_id_from_key clickthrough] CacheSweeperInterval] clickthrough_cache_sweeper
 }
 

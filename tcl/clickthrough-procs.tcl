@@ -138,12 +138,7 @@ ad_proc clickthrough_cache_sweeper {} {
     @creation-date 2000-12-04
     @cvs-id $Id$
 } {
-
-#    if {[nsv_get clickthrough_cache total_clicks] >= [ad_parameter "CacheSize" "clickthrough"]} {
-# }
-# can't get package parameter if running as a scheduled proc???
-
-    if {[nsv_get clickthrough_cache total_clicks] >= 100} {
+    if {[nsv_get clickthrough_cache total_clicks] >= [ad_parameter -package_id [apm_package_id_from_key clickthrough] MaxNumberOfCachedClicks]} {
         # reached cache maximum size -> make a copy (to later write to db) and clear cache
 
 	ns_log Notice "clickthrough_cache_sweeper: reached cache maximum size, dumping to database"

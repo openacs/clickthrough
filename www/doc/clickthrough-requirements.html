@@ -1,0 +1,271 @@
+<html> 
+<head>
+<title>Clickthrough Package Requirements Template</title>
+</head>
+
+<body bgcolor=white>
+
+<h2>Clickthrough Package Requirements Template</h2>
+
+by <a href="mailto:nuno@arsdigita.com">Nuno Santos</a>
+
+<hr>
+
+<h3>I. Introduction</h3>
+
+The following is a requirements document for the Clickthrough package, an ACS service.
+
+<h3>II. Vision Statement</h3><p>
+
+The Clickthrough package provides a service that allows a site or subsite
+to monitor how its users exit the site, by recording which links are 
+followed to external sites. Any link can be clickthrough-enabled by embedding
+special information in its destination address.
+
+<p>
+
+Clickthrough collects information about each pair of local (origin) and foreign (destination) 
+addresses, including a daily count of clickthroughs between each such pair of addresses.
+
+<p>
+
+This clickthrough log can be used to provide external sites with a measure
+of how much traffic originated from the local site, which can be useful for
+auditing or confirming revenue generating clickthroughs (e.g., referrals).
+
+<h3>III. Clickthrough Package Overview</h3>
+
+The Clickthrough package, as a service, has no user interface: in fact, the clickthrough 
+functionality is totally transparent to the end user, who simply follows links as if they 
+were regular, direct links to external sites. The bulk of the package is composed of 
+admin pages that build reports about the collected information.
+
+<p>
+
+The Clickthrough package is subsite aware and can be mounted under any other package
+mount point to provide clickthrough logging service for that package (such a package 
+becomes the <i>parent package</i>). If site-wide clickthrough logging is desired, 
+a Clickthrough instance can be mounted under the site root. Namely, this can be done 
+to emulate the functionality and behavior of the legacy clickthrough module, which 
+used <code>/ct/</code> as its "mount point".
+
+<p>
+
+The allowed transitions in the Clickthrough package are:
+
+<ul>
+  <li>user level:
+  <ul>
+    <li>recording information about the clickthrough (origin, destination, date, 
+        parent package), by incrementing the appropriate click count for each 
+	clickthrough-enabled link that the user clicks on;
+  </ul>
+
+  <li>Clickthrough administrator level:
+  <ul>
+    <li>obtaining reports about the collected information, including all clickthroughs
+        to and from specific addresses, by date, for each specific parent package.
+  </ul>
+</ul>
+
+Clickthrough-enabled links to external sites can be embedded in dynamic pages 
+(e.g., Tcl, ADP) by using a procedure that automatically wraps a plain link with 
+the appropriate clickthrough information.
+
+<p>
+
+Embedding links in static HTML pages, although supported in previous versions, is 
+no longer a requirement for this version of Clickthrough. In fact, the embedded link 
+would have to contain hardcoded clickthrough information. This has the disadvantage 
+of making such a clickthrough-enabled link dependent on the location (the mount point) 
+of the Clickthrough instance.
+
+<h3>IV. Use-cases and User-scenarios</h3>
+
+The Clickthrough package is used by three possibly overlapping classes of users:
+
+<ul>
+  <li>Developers or designers (collectively referred to as "developers"), who embed 
+      clickthrough-enabled links into dynamic pages;
+  <li>End-users (referred to simply as "users"), who follow clickthrough-enabled links
+      to external sites;
+  <li>Clickthrough administrators (referred to "admins"), who use the admin pages to
+      obtain information about the clickthroughs from the site to external addresses.
+</ul>
+
+
+<h4>Clickthrough-enabling links</h4>
+
+<b>David Developer</b> wants a link on a page to be clickthrough-enabled. This means that when
+the user clicks on the link she will be taken to the external site as soon as possible, and the 
+clickthrough will be logged in the background. 
+
+<p>
+
+To clickthrough-enable a link in a dynamic page (e.g., a Tcl or ADP page), David wraps the 
+<code>href</code> part of the link as an argument to a procedure that automatically provides 
+all the necessary information for the clickthrough to be logged, namely the location of the 
+local page (i.e., the origin of the clickthrough), as well as the location of the appropriate 
+clickthrough instance in the sitemap. In this case, David does not need to be aware of the 
+final location of the page he's writing nor be aware of whether and where the clickthrough instance 
+will be mounted on the sitemap, because he does not need to provide any information to the 
+procedure other than the destination URL.
+
+<h4>Following clickthrough-enabled links</h4>
+
+<b>Ursula User</b> is browsing the site and follows a clickthrough-enabled link to an external site. 
+To Ursula, this link is indistinguishable from a regular link. By clicking on it, Ursula is taken
+to the destination page as soon as possible, with only a slight delay. In the background, the 
+Clickthrough package has logged this clickthrough, by incrementing the daily click count for this
+particular local-URL/foreign-URL/parent-package tuple.
+
+
+<h4>Obtaining reports about clickthroughs</h4>
+
+<b>Albert Admin</b> wants to know how users are exiting a specific part of the site by following links
+to external sites. If a Clickthrough instance has been previously mounted under the package that Albert 
+is interested in (meaning that the package has been recording clickthroughs for clickthrough-enabled 
+links), he visits the admin pages for that Clickthrough instance and is able to see reports about when and 
+how frequently users have left that section by following clickthrough-enabled links to external sites. 
+Albert is shown a daily click count for each local page, for each external site and/or for each 
+local-URL/foreign-URL pair. Albert can see raw totals or agreggated data (summary reports).
+
+
+<h3>V. Related Links</h3>
+
+<ul>
+  <li> System/Package "coversheet" - where all documentation for this software is linked off of
+  <li> Design document
+  <li> Developer's guide
+  <li> User's guide
+  <li> Other-cool-system-related-to-this-one document
+  <li> Test plan 
+  <li> Competitive system(s)
+</ul>
+
+<h3>VI.A Requirements: Data Model</h3>
+
+<ul>
+  <li><b>10.10.0</b> Clickthrough log
+  <p>
+  <ul>
+    <li><b>10.10.10</b> Each clickthrough log record refers to a unique local-URL/foreign-URL pair 
+        and to a parent package instance.
+    <li><b>10.10.20</b> No more than one clickthrough log record for each local-URL/foreign-URL pair 
+        will exist for any single day.
+    <li><b>10.10.30</b> Each clickthrough log record contains an incremental count of the clickthroughs 
+        for the local-URL/foreign-URL pair, the package instance and the day it refers to.
+  </ul>
+</ul>
+
+<h3>VI.B Requirements: Developer Support</h3>
+
+<ul>
+  <li><b>20.10.0</b> Format of clickthrough-enabled links
+  <p>
+  <ul>
+    <li><b>20.10.10</b> A clickthrough-enabled link will have the following format: 
+       <code>/<i>parent-package</i>/<i>clickthrough-package</i>/<i>relative-path-of-local-file-under-parent-package</i>?send_to=<i>foreign-url</i></code>, in which 
+       <i>parent-package</i> represents the mounting point of the parent package, 
+       <i>clickthrough-package</i> represents the mounting point of the Clickthrough 
+	  instance underneath the parent package, 
+       <i>relative-path-of-local-file-under-parent-package</i> represents the path to the local 
+	  file that contains the clickthrough-enabled link, relative to the parent package, and
+       <i>foreign-url</i> represents the URL of the external site.
+
+       <p>
+       
+        As an example, <code>/doc/click/basics/file.html?send_to=http://www.adomain.com/adir/afile.html</code>
+	will record clickthroughs from a file named <code>file.html</code>, located under 
+	<code>/doc/basics</code> (<code>/doc</code> being the mounting point for the ACS Core Documents
+	package and <code>basics</code> being a subdirectory within that package) to the
+	<code>http://www.adomain.com/adir/afile.html</code> external page.
+  </ul>
+  <p>
+
+  <li><b>20.20.0</b> Clickthrough-enabling links
+  <p>
+  <ul>
+    <li><b>20.20.10.0</b> Clickthrough-enabling links in dynamic pages
+    <p>
+    <ul>
+      <li><b>20.20.10.10</b> A developer shall be able to build a clickthrough-enabled
+          link in a dynamic page (e.g., Tcl or ADP pages) just by passing the destination, 
+	  or foreign, URL to a procedure. This procedure will return the content of 
+	  the <code>href</code> attribute of an <code>&lt;a&gt;</code> tag. 
+	  Such content will be determined at run-time and will correspond either 
+	  to a plain link to the provided URL or to a clickthrough-enabled link 
+	  to that same address, depending on whether a Clickthrough package is 
+	  mounted under the package to which the page belongs, or not.
+    </ul>
+  </ul>
+</ul>
+
+
+<h3>VI.C Requirements: Internal Transactions</h3>
+
+<ul>
+  <li><b>30.10.0</b> Recording clickthroughs
+  <p>
+  <ul>
+    <li><b>30.10.10</b> Clickthrough logging should use a caching mechanism in order to avoid incurring
+        a database hit for every link that is followed.
+  </ul>
+</ul>
+
+
+<h3>VI.D Requirements: Administrator Interface</h3>
+
+<ul>
+  <li><b>40.10.0</b> Raw data
+  <p>
+  <ul>
+    <li><b>40.10.10</b> The admin will be able to see a list of all clickthroughs from a local URL.
+    <li><b>40.10.20</b> The admin will be able to see a list of all clickthroughs to a foreign URL.
+    <li><b>40.10.30</b> For each local-URL/foreign-URL pair, the admin will be shown a daily count
+        of clickthroughs.
+  </ul>
+  <p>
+
+  <li><b>40.20.0</b> Aggregated data (summary reports)
+  <p>
+  <ul>
+    <li><b>40.10.10</b> The admin will be able to see a list of all clickthroughs, grouped by local URL,
+        along with a total count of clickthroughs for each URL pair.
+    <li><b>40.10.20</b> The admin will be able to see a list of all clickthroughs, grouped by foreign URL,
+        along with a total count of clickthroughs for each URL pair.
+    <li><b>40.10.30</b> For each local-URL/foreign-URL pair, the admin will be shown a daily count
+        of clickthroughs.
+  </ul>
+</ul>
+
+
+<h3>VII. Revision History</h3>
+
+<table cellpadding=2 cellspacing=2 width=90% bgcolor=#efefef>
+<tr bgcolor=#e0e0e0>
+    <th width=10%>Document Revision #</th>
+    <th width=50%>Action Taken, Notes</th>
+    <th>When?</th>
+    <th>By Whom?</th>
+</tr>
+
+<tr>
+   <td>0.1</td>
+   <td>Creation</td>
+   <td>2000/11/20</td>
+   <td>Nuno Santos</td>
+</tr>
+
+
+</table>
+
+<p>
+
+<hr>
+<address><a href="mailto:nuno@arsdigita.com">nuno@arsdigita.com</a></address>
+
+Last modified: $Date$
+
+</body>
+</html>

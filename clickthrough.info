@@ -26,7 +26,8 @@ Any link can be clickthrough-enabled by embedding special information in its des
 
         <files>
             <file type="package_spec" path="clickthrough.info"/>
-            <file type="documentation" path="doc/clickthrough-requirements.html"/>
+            <file type="documentation" path="www/doc/clickthrough-requirements.html"/>
+            <file type="documentation" path="www/doc/index.html"/>
             <file type="data_model_create" db_type="oracle" path="sql/oracle/clickthrough-create.sql"/>
             <file type="data_model_drop" db_type="oracle" path="sql/oracle/clickthrough-drop.sql"/>
             <file type="data_model_create" db_type="postgresql" path="sql/postgresql/clickthrough-create.sql"/>

@@ -2,7 +2,7 @@
 <property name=title>@local_url@ -&gt; @foreign_url@</property>
 
 <h2>
-  <a href="/@local_url@">@local_url@</a> 
+  <a href="@local_url@">@local_url@</a> 
   -&gt; 
   <a href="@foreign_url@">@foreign_url@</a>
 </h2>
