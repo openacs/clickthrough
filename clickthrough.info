@@ -22,7 +22,7 @@ This clickthrough log can be used to provide external sites with a measure of ho
 
 Any link can be clickthrough-enabled by embedding special information in its destination address. This is achieved by wrapping the href attribute with a call to `clickthrough_href' (e.g., [clickthrough_href http://www.arsdigita.com]).</description>
 
-        <requires url="acs-kernel" version="4.0"/>
+        <requires url="acs-kernel" version="4.6.2"/>
 
         <files>
             <file type="package_spec" path="clickthrough.info"/>
