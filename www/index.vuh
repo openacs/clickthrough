@@ -1,0 +1,44 @@
+# www/index.vuh
+
+ad_page_contract {
+
+    @param send_to The URL to redirect to
+
+    @author Nuno Santos (nuno@arsdigita.com)
+    @creation-date 2000-11-16
+    @cvs-id $Id$
+} {
+    send_to
+}
+
+
+# sometimes the foreign url is malformed, notable just "http"
+if { $send_to == "http" } {
+    ad_return_error "Redirected to HTTP only" "You were redirected to just \"http\"; the way that we do clickthroughs 
+                     here requires your browser to be a little bit liberal about how it handles URLs.  
+                     Your browser apparently isn't.  If you go back to the preceding page and View Source, 
+                     you can probably tease out the target URL and go there manually with an Open command."
+    return
+}
+
+# send the user to the link's destination url asap
+ad_returnredirect $send_to
+
+
+
+# user is off our hands now; time to log
+
+set clickthrough_package_id [ad_conn package_id]
+
+# get info about the parent package of this clickthrough instance
+db_1row parent_package_sql "select sn2.object_id as parent_package_id, 
+                                   site_node.url(sn2.node_id) as parent_package_url
+                              from site_nodes sn1, site_nodes sn2 
+                             where sn1.object_id = :clickthrough_package_id 
+                               and sn1.parent_id = sn2.node_id"
+
+# build the local url from the parent package base url and the relative url
+append local_url $parent_package_url [ad_conn path_info]
+
+# actually log the clickthrough (maybe cached in memory for performance)
+clickthrough_log_click $local_url $send_to $parent_package_id
