@@ -44,3 +44,5 @@ append local_url $parent_package_url [ad_conn path_info]
 
 # actually log the clickthrough (maybe cached in memory for performance)
 clickthrough_log_click $local_url $send_to $parent_package_id
+
+

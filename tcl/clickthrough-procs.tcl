@@ -218,3 +218,5 @@ ad_proc clickthrough_cache_sweeper {} {
 	array donesearch cache_copy $search_id
     }
 }
+
+
