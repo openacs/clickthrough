@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name=title>@local_url@ -&gt; @foreign_url@</property>
 <property name="context">@context@</property>
 

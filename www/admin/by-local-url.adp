@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name=title>Clickthroughs by local URL</property>
 <property name="context">@context@</property>
 

@@ -1,4 +1,4 @@
-<master src="master">
+<master>
 <property name=title>Clickthroughs to @foreign_url@ on @query_date@</property>
 <property name="context">@context@</property>
 
