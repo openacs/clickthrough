@@ -13,7 +13,7 @@ create table clickthrough_log (
     foreign_url	varchar(400) not null,	  -- full URL on the foreign server
     entry_date	date,	                  -- clickthrough counts are daily counts
     click_count	integer default 0,
-    package_id  constraint ct_log_package_id_fk
+    package_id  integer constraint ct_log_package_id_fk
 		references apm_packages(package_id),
     constraint ct_log_pk primary key (local_url, foreign_url, entry_date)
 );
