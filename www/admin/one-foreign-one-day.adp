@@ -9,7 +9,7 @@
 
 <ul>
   <multiple name="urls">
-    <li> from <a href="/@urls.local_url@">@urls.local_url@</a> : @urls.click_count@
+    <li> from <a href="@urls.local_url@">@urls.local_url@</a> : @urls.click_count@
   </multiple>
 </ul>
 
