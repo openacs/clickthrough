@@ -125,8 +125,7 @@ ad_proc clickthrough_log_click {local_url foreign_url package_id} {
 	# increment the total click count
 	nsv_incr clickthrough_cache total_clicks
     } errmsg]} {
-	ns_log Notice "Clickthrough counting failed -> local_url: '$local_url' ; foreign_url: '$foreign_url' ; 
-	               package_id: '$package_id' ; error message: '$errmsg'"
+	ns_log Warning "Clickthrough counting failed -> local_url: '$local_url' ; foreign_url: '$foreign_url' ;  package_id: '$package_id' ; error message:\n$errmsg"
     }
 }
 
@@ -141,7 +140,7 @@ ad_proc clickthrough_cache_sweeper {} {
     if {[nsv_get clickthrough_cache total_clicks] >= [ad_parameter -package_id [apm_package_id_from_key clickthrough] MaxNumberOfCachedClicks]} {
         # reached cache maximum size -> make a copy (to later write to db) and clear cache
 
-	ns_log Notice "clickthrough_cache_sweeper: reached cache maximum size, dumping to database"
+	ns_log debug "clickthrough_cache_sweeper: reached cache maximum size, dumping to database"
 
 	# lock access to cache -- only during in memory cache copy, no DB access
 	ns_mutex lock [nsv_get clickthrough_mutex mutex]
@@ -201,12 +200,12 @@ ad_proc clickthrough_cache_sweeper {} {
 			                     and foreign_url = :cached_foreign_url
 			                     and package_id = :cached_package_id
 			                     and trunc(entry_date) = trunc(sysdate)) } } errmsg]} {
-			        ns_log Notice "Clickthrough insert failed:  $errmsg"
+			        ns_log Warning "Clickthrough insert failed:  $errmsg"
 			    }
 		    }
 		}
 	    } else {
-		ns_log Notice "clickthrough_cache_sweeper: error reading cache entry. Some clickthroughs may have been lost."
+		ns_log Warning "clickthrough_cache_sweeper: error reading cache entry. Some clickthroughs may have been lost."
 	    }
 	}
 	
