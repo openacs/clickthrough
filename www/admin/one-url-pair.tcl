@@ -20,7 +20,7 @@ set context_bar [ad_context_bar "Clickthroughs for one URL pair"]
 
 
 set parent_package_id [clickthrough_parent_package_id]
-template::query urls multirow "
+template::query one_url_pair urls multirow "
     select entry_date, click_count
       from clickthrough_log
      where local_url = :local_url

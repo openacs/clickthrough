@@ -19,7 +19,7 @@ set context_bar [ad_context_bar "Clickthroughs to foreign URL"]
 
 set parent_package_id [clickthrough_parent_package_id]
 
-template::query urls multirow "
+template::query all_to_foreign urls multirow "
     select entry_date, sum(click_count) as n_clicks 
       from clickthrough_log
      where foreign_url = :foreign_url

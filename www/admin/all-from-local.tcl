@@ -19,7 +19,7 @@ set context_bar [ad_context_bar "Clickthroughs from local URL"]
 
 set parent_package_id [clickthrough_parent_package_id]
 
-template::query urls multirow "
+template::query all_from_local urls multirow "
     select entry_date, sum(click_count) as n_clicks
       from clickthrough_log
      where local_url = :local_url

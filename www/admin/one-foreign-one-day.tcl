@@ -21,7 +21,7 @@ set context_bar [ad_context_bar [list "all-to-foreign?[export_url_vars foreign_u
 
 set parent_package_id [clickthrough_parent_package_id]
 
-template::query urls multirow "
+template::query one_foreign_one_day urls multirow "
     select local_url, click_count
       from clickthrough_log
      where foreign_url = :foreign_url

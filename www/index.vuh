@@ -37,6 +37,8 @@ db_1row parent_package_sql "select sn2.object_id as parent_package_id,
                              where sn1.object_id = :clickthrough_package_id 
                                and sn1.parent_id = sn2.node_id"
 
+
+
 # build the local url from the parent package base url and the relative url
 append local_url $parent_package_url [ad_conn path_info]
 
