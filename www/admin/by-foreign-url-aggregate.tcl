@@ -10,11 +10,11 @@ ad_page_contract {
 } {
     {minimum 0}
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     urls:multirow
 }
 
-set context_bar [ad_context_bar "Clickthroughs by local URL"]
+set context [list "Clickthroughs by local URL"]
 
 
 set parent_package_id [clickthrough_parent_package_id]

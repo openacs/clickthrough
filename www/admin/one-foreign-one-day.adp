@@ -1,11 +1,8 @@
-<master src="/www/default-master">
+<master src="master">
 <property name=title>Clickthroughs to @foreign_url@ on @query_date@</property>
+<property name="context">@context@</property>
 
 <h2>Clickthroughs to <a href="@foreign_url@">@foreign_url@</a> on @query_date@</h2>
-
-@context_bar@
-
-<hr>
 
 <ul>
   <multiple name="urls">

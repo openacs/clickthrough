@@ -12,11 +12,11 @@ ad_page_contract {
     local_url
     foreign_url    
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     urls:multirow
 }
 
-set context_bar [ad_context_bar "Clickthroughs for one URL pair"]
+set context [list "Clickthroughs for one URL pair"]
 
 
 set parent_package_id [clickthrough_parent_package_id]

@@ -8,11 +8,11 @@ ad_page_contract {
 } {
 
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     urls:multirow
 }
 
-set context_bar [ad_context_bar "Clickthroughs by foreign URL"]
+set context [list "Clickthroughs by foreign URL"]
 
 
 set parent_package_id [clickthrough_parent_package_id]

@@ -12,11 +12,11 @@ ad_page_contract {
     local_url
     query_date   
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     urls:multirow
 }
 
-set context_bar [ad_context_bar [list "all-from-local?[export_url_vars local_url]" "Clickthroughs from local URL"] "On $query_date"]
+set context [list [list "all-from-local?[export_url_vars local_url]" "Clickthroughs from local URL"] "On $query_date"]
 
 
 set parent_package_id [clickthrough_parent_package_id]

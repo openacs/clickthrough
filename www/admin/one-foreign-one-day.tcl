@@ -12,11 +12,11 @@ ad_page_contract {
     foreign_url
     query_date  
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     urls:multirow
 }
 
-set context_bar [ad_context_bar [list "all-to-foreign?[export_url_vars foreign_url]" "Clickthroughs to foreign URL"] "On $query_date"]
+set context [list [list "all-to-foreign?[export_url_vars foreign_url]" "Clickthroughs to foreign URL"] "On $query_date"]
 
 
 set parent_package_id [clickthrough_parent_package_id]

@@ -8,7 +8,7 @@ ad_page_contract {
 } {    
 
 } -properties {
-    context_bar:onevalue
+    context:onevalue
     package_name:onevalue
 }
  
@@ -18,6 +18,6 @@ ad_page_contract {
 
 set package_name [clickthrough_parent_package_instance_name]
 
-set context_bar [ad_context_bar]
+set context [list]
 
 ad_return_template

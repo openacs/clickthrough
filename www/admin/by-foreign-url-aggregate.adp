@@ -1,11 +1,6 @@
-<master src="/www/default-master">
+<master src="master">
 <property name=title>Clickthroughs by foreign URL: summary report</property>
-
-<h2>Clickthroughs by foreign URL: summary report</h2>
-
-@context_bar@
-
-<hr>
+<property name="context">@context@</property>
 
 Note: this page may be slow to generate; it requires a tremendous amount of chugging by the RDBMS.
 

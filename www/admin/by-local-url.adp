@@ -1,11 +1,6 @@
-<master src="/www/default-master">
+<master src="master">
 <property name=title>Clickthroughs by local URL</property>
-
-<h2>Clickthroughs by local URL</h2>
-
-@context_bar@
-
-<hr>
+<property name="context">@context@</property>
 
 <ul>
   <multiple name="urls">
