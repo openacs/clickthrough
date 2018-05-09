@@ -18,6 +18,6 @@ ad_page_contract {
 
 set package_name [clickthrough_parent_package_instance_name]
 
-set context {}
+set context [list]
 
 ad_return_template
